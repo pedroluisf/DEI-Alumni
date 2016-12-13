@@ -1,4 +1,4 @@
-# DEI-Lapr5
+# DEI-Alumni
 Academic Final year project for OpenGL
 
 # Project Description

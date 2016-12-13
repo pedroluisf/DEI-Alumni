@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+ xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+ xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:ns2="http://dei.isep.ipp.pt/WsApiSoap"
+ xmlns:ns1="http://dei.isep.ipp.pt/"
+ xmlns:ns3="http://dei.isep.ipp.pt/WsApiSoap12">
+ <SOAP-ENV:Body>
+   <ns1:setResultados>
+    <ns1:utilizador>0</ns1:utilizador>
+    <ns1:mapa>0</ns1:mapa>
+    <ns1:torneio>0</ns1:torneio>
+    <ns1:pontuacao>0.0</ns1:pontuacao>
+   </ns1:setResultados>
+
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

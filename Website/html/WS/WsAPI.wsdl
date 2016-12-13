@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://dei.isep.ipp.pt/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://dei.isep.ipp.pt/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://dei.isep.ipp.pt/">
+      <s:element name="setResultados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="utilizador" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="mapa" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="torneio" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="pontuacao" type="s:double" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="setResultadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="setResultadosResult" type="tns:ArrayOfClassificacao" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfClassificacao">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Classificacao" nillable="true" type="tns:Classificacao" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Classificacao">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Posicao" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Pontuacao" type="s:double" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getTorneio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="utilizador" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="mapa" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getTorneioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getTorneioResult" type="tns:ArrayOfTorneio" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfTorneio">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Torneio" nillable="true" type="tns:Torneio" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Torneio">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Nome" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DataInicio" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="DataFim" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="login">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="utilizador" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="md5password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="loginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="loginResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="setResultadosSoapIn">
+    <wsdl:part name="parameters" element="tns:setResultados" />
+  </wsdl:message>
+  <wsdl:message name="setResultadosSoapOut">
+    <wsdl:part name="parameters" element="tns:setResultadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTorneioSoapIn">
+    <wsdl:part name="parameters" element="tns:getTorneio" />
+  </wsdl:message>
+  <wsdl:message name="getTorneioSoapOut">
+    <wsdl:part name="parameters" element="tns:getTorneioResponse" />
+  </wsdl:message>
+  <wsdl:message name="loginSoapIn">
+    <wsdl:part name="parameters" element="tns:login" />
+  </wsdl:message>
+  <wsdl:message name="loginSoapOut">
+    <wsdl:part name="parameters" element="tns:loginResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WsApiSoap">
+    <wsdl:operation name="setResultados">
+      <wsdl:input message="tns:setResultadosSoapIn" />
+      <wsdl:output message="tns:setResultadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTorneio">
+      <wsdl:input message="tns:getTorneioSoapIn" />
+      <wsdl:output message="tns:getTorneioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdl:input message="tns:loginSoapIn" />
+      <wsdl:output message="tns:loginSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WsApiSoap" type="tns:WsApiSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="setResultados">
+      <soap:operation soapAction="http://dei.isep.ipp.pt/setResultados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTorneio">
+      <soap:operation soapAction="http://dei.isep.ipp.pt/getTorneio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <soap:operation soapAction="http://dei.isep.ipp.pt/login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WsApiSoap12" type="tns:WsApiSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="setResultados">
+      <soap12:operation soapAction="http://dei.isep.ipp.pt/setResultados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTorneio">
+      <soap12:operation soapAction="http://dei.isep.ipp.pt/getTorneio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <soap12:operation soapAction="http://dei.isep.ipp.pt/login" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WsApi">
+    <wsdl:port name="WsApiSoap" binding="tns:WsApiSoap">
+      <soap:address location="http://uvm101.dei.isep.ipp.pt/WS/WsAPI.php" />
+    </wsdl:port>
+    <wsdl:port name="WsApiSoap12" binding="tns:WsApiSoap12">
+      <soap12:address location="http://uvm101.dei.isep.ipp.pt/WS/WsAPI.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
